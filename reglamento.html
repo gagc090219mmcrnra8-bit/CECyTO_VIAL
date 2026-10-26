@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CECyTO Vial | Reglamento</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">✦ CECyTO <span>Vial</span></div>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a class="activo" aria-current="page" href="reglamento.html">Reglamento</a>
+            <a href="infracciones.html">Infracciones</a>
+            <a href="cuestionario.html">Cuestionario</a>
+            <a href="resultado.html">Resultado</a>
+        </nav>
+    </header>
+
+    <main>
+        <p><strong>02 / PROTOTIPO WEB</strong></p>
+        <h1>Consulta el reglamento vial</h1>
+        <p class="subtitulo">
+            Busca ejemplos por palabra clave o categoría.
+        </p>
+
+        <section class="panel">
+            <label for="busqueda">
+                <strong>Buscar por palabra clave, artículo o tipo de falta</strong>
+            </label>
+
+            <input
+                id="busqueda"
+                type="search"
+                placeholder="Ej. cinturón, semáforo, casco..."
+                autocomplete="off"
+            >
+
+            <div class="filtros grid" style="margin-top: 14px;">
+                <button type="button" data-categoria="Todas" aria-pressed="true">
+                    Todas
+                </button>
+                <button type="button" data-categoria="Leve" aria-pressed="false">
+                    Faltas leves
+                </button>
+                <button type="button" data-categoria="Grave" aria-pressed="false">
+                    Faltas graves
+                </button>
+                <button type="button" data-categoria="Gravísima" aria-pressed="false">
+                    Faltas gravísimas
+                </button>
+            </div>
+        </section>
+
+        <p id="cantidad" aria-live="polite"></p>
+        <section id="resultados" class="grid" aria-label="Resultados"></section>
+    </main>
+
+    <footer>CECyTO Vial · Educación vial</footer>
+
+    <script>
+        // Registros de ejemplo para demostrar el funcionamiento del buscador.
+        const registros = [
+            {
+                articulo: "Ejemplo 01",
+                titulo: "Uso del cinturón de seguridad",
+                tipo: "Grave",
+                texto: "Utiliza correctamente el cinturón de seguridad."
+            },
+            {
+                articulo: "Ejemplo 02",
+                titulo: "Cambio de carril",
+                tipo: "Leve",
+                texto: "Revisa los espejos y señaliza antes de cambiar de carril."
+            },
+            {
+                articulo: "Ejemplo 03",
+                titulo: "Conducir bajo efectos del alcohol",
+                tipo: "Gravísima",
+                texto: "No conduzcas bajo los efectos del alcohol."
+            },
+            {
+                articulo: "Ejemplo 04",
+                titulo: "Respeto a los semáforos",
+                tipo: "Grave",
+                texto: "Respeta las señales y los semáforos de tránsito."
+            },
+            {
+                articulo: "Ejemplo 05",
+                titulo: "Uso del casco",
+                tipo: "Grave",
+                texto: "Utiliza un casco adecuado al conducir una motocicleta."
+            },
+            {
+                articulo: "Ejemplo 06",
+                titulo: "Señalización de maniobras",
+                tipo: "Leve",
+                texto: "Indica con anticipación las maniobras que realizarás."
+            }
+        ];
+
+        let categoriaActual = "Todas";
+
+        // Permite buscar sin distinguir mayúsculas ni acentos.
+        function normalizarTexto(texto) {
+            return texto
+                .toLocaleLowerCase("es")
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function mostrarResultados() {
+            const busqueda = normalizarTexto(
+                document.getElementById("busqueda").value.trim()
+            );
+
+            const contenedor = document.getElementById("resultados");
+            const cantidad = document.getElementById("cantidad");
+
+            const filtrados = registros.filter((registro) => {
+                const coincideCategoria =
+                    categoriaActual === "Todas" ||
+                    registro.tipo === categoriaActual;
+
+                const contenido = normalizarTexto(
+                    `${registro.articulo} ${registro.titulo} ` +
+                    `${registro.tipo} ${registro.texto}`
+                );
+
+                return coincideCategoria && contenido.includes(busqueda);
+            });
+
+            cantidad.textContent =
+                `${filtrados.length} resultado(s) encontrado(s).`;
+
+            contenedor.replaceChildren();
+
+            if (filtrados.length === 0) {
+                const mensaje = document.createElement("article");
+                mensaje.className = "resultado";
+                mensaje.textContent =
+                    "No hay coincidencias. Prueba otra palabra o categoría.";
+
+                contenedor.appendChild(mensaje);
+                return;
+            }
+
+            filtrados.forEach((registro) => {
+                const tarjeta = document.createElement("article");
+                tarjeta.className = "resultado";
+
+                const etiqueta = document.createElement("span");
+                etiqueta.className = "etiqueta";
+                etiqueta.textContent = `Categoría ilustrativa: ${registro.tipo}`;
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = registro.titulo;
+
+                const articulo = document.createElement("p");
+                articulo.textContent = registro.articulo;
+
+                const descripcion = document.createElement("p");
+                descripcion.textContent = registro.texto;
+
+                const nota = document.createElement("small");
+                nota.textContent = "Ejemplo educativo; no es una cita legal oficial.";
+
+                tarjeta.append(etiqueta, titulo, articulo, descripcion, nota);
+                contenedor.appendChild(tarjeta);
+            });
+        }
+
+        document
+            .getElementById("busqueda")
+            .addEventListener("input", mostrarResultados);
+
+        document.querySelectorAll("[data-categoria]").forEach((boton) => {
+            boton.addEventListener("click", () => {
+                categoriaActual = boton.dataset.categoria;
+
+                document.querySelectorAll("[data-categoria]").forEach((otro) => {
+                    const seleccionado = otro === boton;
+
+                    otro.classList.toggle("seleccionado", seleccionado);
+                    otro.setAttribute("aria-pressed", String(seleccionado));
+
+                    otro.style.backgroundColor = seleccionado
+                        ? "var(--turquesa)"
+                        : "";
+                });
+
+                mostrarResultados();
+            });
+        });
+
+        // Muestra todos los registros al cargar la página.
+        mostrarResultados();
+
+        // Aplica el estilo inicial al filtro seleccionado.
+        document.querySelector('[data-categoria="Todas"]').style.backgroundColor =
+            "var(--turquesa)";
+    </script>
+</body>
+</html>

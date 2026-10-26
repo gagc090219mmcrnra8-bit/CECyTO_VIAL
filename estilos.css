@@ -1,0 +1,283 @@
+/* ========================================
+   PROYECTO: CECyTO Vial
+   Hoja de estilos general
+======================================== */
+
+/* 1. Variables de diseño */
+:root {
+    --azul: #102a43;
+    --azul-claro: #176b87;
+    --turquesa: #49d6c2;
+    --fondo: #f2f7fa;
+    --blanco: #ffffff;
+    --texto: #263746;
+    --gris: #607384;
+    --borde: #dce7ec;
+    --aviso: #fff5df;
+}
+
+/* 2. Configuración general */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--texto);
+    background: var(--fondo);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--azul);
+}
+
+h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.2;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    overflow-wrap: anywhere;
+}
+
+a {
+    color: var(--azul-claro);
+}
+
+/* 3. Encabezado y menú */
+header,
+footer {
+    padding: 20px;
+    color: var(--blanco);
+    background: var(--azul);
+    text-align: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--turquesa);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 12px;
+}
+
+nav a {
+    padding: 8px 12px;
+    border-radius: 7px;
+    color: var(--blanco);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+nav a:hover,
+nav a.activo {
+    background: #ffffff20;
+}
+
+/* 4. Contenedor principal */
+main {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 65vh;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.contenido-centrado {
+    text-align: center;
+}
+
+.subtitulo {
+    color: var(--gris);
+}
+
+.panel,
+.tarjeta,
+.resultado {
+    padding: 22px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background: var(--blanco);
+    box-shadow: 0 4px 14px #102a4308;
+}
+
+.panel {
+    margin: 20px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(230px, 1fr)
+    );
+    gap: 16px;
+}
+
+/* 5. Botones */
+button,
+.boton {
+    display: inline-block;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--azul-claro);
+    color: var(--blanco);
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover,
+.boton:hover {
+    background: var(--azul);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.boton-secundario {
+    background: var(--turquesa);
+    color: var(--azul);
+}
+
+/* 6. Campos de formulario */
+input,
+select,
+textarea {
+    width: 100%;
+    margin-top: 7px;
+    padding: 12px;
+    border: 1px solid #b9cbd2;
+    border-radius: 8px;
+    background: var(--blanco);
+    color: var(--texto);
+    font: inherit;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+/* 7. Etiquetas y avisos */
+.etiqueta {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e5f5f2;
+    color: #176b60;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.aviso {
+    margin: 22px 0;
+    padding: 15px;
+    border-left: 5px solid #e7a23b;
+    border-radius: 8px;
+    background: var(--aviso);
+}
+
+.resultado {
+    border-left: 5px solid var(--turquesa);
+}
+
+.oculto {
+    display: none;
+}
+
+.correcto {
+    border-left: 5px solid #269b67;
+}
+
+.incorrecto {
+    border-left: 5px solid #d9534f;
+}
+
+.progreso {
+    width: 100%;
+    height: 12px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #dce7ec;
+}
+
+.progreso div {
+    width: 0;
+    height: 100%;
+    background: var(--turquesa);
+    transition: width 0.3s;
+}
+
+/* 8. Accesibilidad */
+:focus-visible {
+    outline: 3px solid var(--turquesa);
+    outline-offset: 3px;
+}
+
+/* 9. Adaptación para celulares */
+@media (max-width: 480px) {
+    header,
+    footer {
+        padding: 16px 12px;
+    }
+
+    nav {
+        gap: 4px;
+    }
+
+    nav a {
+        padding: 7px;
+        font-size: 14px;
+    }
+
+    main {
+        padding: 24px 14px;
+    }
+
+    .panel,
+    .tarjeta,
+    .resultado {
+        padding: 17px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    button,
+    .boton {
+        max-width: 100%;
+    }
+}

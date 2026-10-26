@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CECyTO Vial | Cuestionario</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">✦ CECyTO <span>Vial</span></div>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="reglamento.html">Reglamento</a>
+            <a href="infracciones.html">Infracciones</a>
+            <a class="activo" aria-current="page" href="cuestionario.html">Cuestionario</a>
+            <a href="resultado.html">Resultado</a>
+        </nav>
+    </header>
+
+    <main>
+        <p><strong>04 / EVALUACIÓN EDUCATIVA</strong></p>
+        <h1>Cuestionario de educación vial</h1>
+
+        <p class="subtitulo">
+            Responde las cinco preguntas y revisa tu resultado al finalizar.
+        </p>
+
+        <div class="progreso" aria-label="Progreso del cuestionario">
+            <div id="barraProgreso"></div>
+        </div>
+
+        <p id="estadoProgreso" aria-live="polite">0 de 5 respondidas</p>
+
+        <form id="formularioCuestionario">
+            <section class="panel">
+                <fieldset>
+                    <legend><strong>1. ¿Para qué sirve el cinturón de seguridad?</strong></legend>
+
+                    <label>
+                        <input type="radio" name="p1" value="a">
+                        Para reducir el riesgo de lesiones.
+                    </label>
+                    <label>
+                        <input type="radio" name="p1" value="b">
+                        Para aumentar la velocidad.
+                    </label>
+                    <label>
+                        <input type="radio" name="p1" value="c">
+                        Solo es necesario en viajes largos.
+                    </label>
+                </fieldset>
+            </section>
+
+            <section class="panel">
+                <fieldset>
+                    <legend><strong>2. ¿Qué debes hacer ante un semáforo en rojo?</strong></legend>
+
+                    <label>
+                        <input type="radio" name="p2" value="a">
+                        Acelerar para pasar rápidamente.
+                    </label>
+                    <label>
+                        <input type="radio" name="p2" value="b">
+                        Detenerte de manera segura y respetar la señal.
+                    </label>
+                    <label>
+                        <input type="radio" name="p2" value="c">
+                        Ignorar la señal si no hay vehículos.
+                    </label>
+                </fieldset>
+            </section>
+
+            <section class="panel">
+                <fieldset>
+                    <legend><strong>3. ¿Qué debes hacer antes de cambiar de carril?</strong></legend>
+
+                    <label>
+                        <input type="radio" name="p3" value="a">
+                        Cambiar de inmediato sin mirar.
+                    </label>
+                    <label>
+                        <input type="radio" name="p3" value="b">
+                        Tocar el claxon y girar.
+                    </label>
+                    <label>
+                        <input type="radio" name="p3" value="c">
+                        Revisar el entorno y señalizar la maniobra.
+                    </label>
+                </fieldset>
+            </section>
+
+            <section class="panel">
+                <fieldset>
+                    <legend><strong>4. ¿Qué medida de protección es importante en motocicleta?</strong></legend>
+
+                    <label>
+                        <input type="radio" name="p4" value="a">
+                        Utilizar un casco adecuado.
+                    </label>
+                    <label>
+                        <input type="radio" name="p4" value="b">
+                        Conducir sin equipo de protección.
+                    </label>
+                    <label>
+                        <input type="radio" name="p4" value="c">
+                        Sujetar objetos con ambas manos.
+                    </label>
+                </fieldset>
+            </section>
+
+            <section class="panel">
+                <fieldset>
+                    <legend><strong>5. ¿Qué debes hacer si has consumido alcohol?</strong></legend>
+
+                    <label>
+                        <input type="radio" name="p5" value="a">
+                        Conducir lentamente.
+                    </label>
+                    <label>
+                        <input type="radio" name="p5" value="b">
+                        No conducir y buscar una alternativa segura.
+                    </label>
+                    <label>
+                        <input type="radio" name="p5" value="c">
+                        Conducir solo por calles conocidas.
+                    </label>
+                </fieldset>
+            </section>
+
+            <button type="submit">Calificar cuestionario</button>
+        </form>
+
+        <section id="retroalimentacion" class="panel oculto" aria-live="polite">
+            <h2>Revisión de tus respuestas</h2>
+            <div id="detallesRespuestas"></div>
+            <a class="boton" href="resultado.html">Ver resultado final</a>
+        </section>
+    </main>
+
+    <footer>CECyTO Vial · Educación vial</footer>
+
+    <script>
+        // Respuestas correctas y explicaciones educativas.
+        const preguntas = [
+            {
+                nombre: "p1",
+                correcta: "a",
+                explicacion: "El cinturón ayuda a reducir el riesgo de lesiones."
+            },
+            {
+                nombre: "p2",
+                correcta: "b",
+                explicacion: "Debes respetar el semáforo y detenerte de forma segura."
+            },
+            {
+                nombre: "p3",
+                correcta: "c",
+                explicacion: "Revisa el entorno y señaliza antes de cambiar de carril."
+            },
+            {
+                nombre: "p4",
+                correcta: "a",
+                explicacion: "El casco adecuado es una medida esencial de protección."
+            },
+            {
+                nombre: "p5",
+                correcta: "b",
+                explicacion: "Si consumes alcohol, no conduzcas; busca una alternativa segura."
+            }
+        ];
+
+        const formulario = document.getElementById("formularioCuestionario");
+        const barra = document.getElementById("barraProgreso");
+        const estado = document.getElementById("estadoProgreso");
+
+        // Actualiza el progreso cuando se selecciona una respuesta.
+        formulario.addEventListener("change", () => {
+            const respondidas = preguntas.filter((pregunta) => {
+                return formulario.querySelector(
+                    `input[name="${pregunta.nombre}"]:checked`
+                );
+            }).length;
+
+            barra.style.width = `${(respondidas / preguntas.length) * 100}%`;
+            estado.textContent = `${respondidas} de ${preguntas.length} respondidas`;
+        });
+
+        formulario.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const sinResponder = preguntas.filter((pregunta) => {
+                return !formulario.querySelector(
+                    `input[name="${pregunta.nombre}"]:checked`
+                );
+            });
+
+            if (sinResponder.length > 0) {
+                alert("Responde todas las preguntas antes de calificar.");
+                return;
+            }
+
+            let aciertos = 0;
+            const detalles = document.getElementById("detallesRespuestas");
+            detalles.replaceChildren();
+
+            preguntas.forEach((pregunta, indice) => {
+                const seleccionada = formulario.querySelector(
+                    `input[name="${pregunta.nombre}"]:checked`
+                ).value;
+
+                const esCorrecta = seleccionada === pregunta.correcta;
+
+                if (esCorrecta) {
+                    aciertos++;
+                }
+
+                const tarjeta = document.createElement("article");
+                tarjeta.className = esCorrecta
+                    ? "resultado correcto"
+                    : "resultado incorrecto";
+
+                const titulo = document.createElement("h3");
+                titulo.textContent =
+                    `Pregunta ${indice + 1}: ${esCorrecta ? "Correcta" : "Incorrecta"}`;
+
+                const explicacion = document.createElement("p");
+                explicacion.textContent = pregunta.explicacion;
+
+                tarjeta.append(titulo, explicacion);
+                detalles.appendChild(tarjeta);
+            });
+
+            const calificacion = Math.round(
+                (aciertos / preguntas.length) * 100
+            );
+
+            const resultado = {
+                aciertos: aciertos,
+                total: preguntas.length,
+                calificacion: calificacion,
+                fecha: new Date().toLocaleString("es-MX")
+            };
+
+            // Guarda el resultado en este navegador.
+            try {
+                localStorage.setItem(
+                    "resultadoCECyTOVial",
+                    JSON.stringify(resultado)
+                );
+            } catch (error) {
+                alert(
+                    "El navegador no permitió guardar el resultado. " +
+                    "Podrás revisar la calificación en esta página."
+                );
+            }
+
+            document.getElementById("retroalimentacion").classList.remove("oculto");
+
+            document.getElementById("retroalimentacion").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+    </script>
+</body>
+</html>

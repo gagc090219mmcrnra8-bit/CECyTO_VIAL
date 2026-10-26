@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CECyTO Vial | Resultado</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">✦ CECyTO <span>Vial</span></div>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="reglamento.html">Reglamento</a>
+            <a href="infracciones.html">Infracciones</a>
+            <a href="cuestionario.html">Cuestionario</a>
+            <a class="activo" aria-current="page" href="resultado.html">Resultado</a>
+        </nav>
+    </header>
+
+    <main>
+        <p><strong>05 / RESULTADO</strong></p>
+        <h1>Tu resultado</h1>
+
+        <section id="resultadoDisponible" class="panel oculto">
+            <p class="subtitulo">Calificación obtenida</p>
+            <h2 id="calificacion" aria-live="polite">0%</h2>
+
+            <div class="progreso">
+                <div id="barraResultado"></div>
+            </div>
+
+            <p id="aciertos"></p>
+            <p id="mensaje"></p>
+            <p id="fecha" class="subtitulo"></p>
+
+            <a class="boton" href="cuestionario.html">
+                Intentar nuevamente
+            </a>
+        </section>
+
+        <section id="sinResultado" class="panel">
+            <h2>Aún no hay resultados</h2>
+            <p>
+                Primero debes responder las preguntas del cuestionario.
+                Después podrás consultar aquí tu calificación.
+            </p>
+
+            <a class="boton" href="cuestionario.html">
+                Ir al cuestionario
+            </a>
+        </section>
+
+    </main>
+
+    <footer>CECyTO Vial · Educación vial</footer>
+
+    <script>
+        // Recupera la información guardada por el cuestionario.
+        function mostrarResultado() {
+            const seccionResultado =
+                document.getElementById("resultadoDisponible");
+
+            const seccionVacia =
+                document.getElementById("sinResultado");
+
+            let resultado;
+
+            try {
+                const datos = localStorage.getItem("resultadoCECyTOVial");
+
+                if (datos) {
+                    resultado = JSON.parse(datos);
+                }
+            } catch (error) {
+                resultado = null;
+            }
+
+            // Comprueba que los datos guardados sean válidos.
+            const valido =
+                resultado &&
+                Number.isFinite(resultado.aciertos) &&
+                Number.isFinite(resultado.total) &&
+                Number.isFinite(resultado.calificacion) &&
+                resultado.total > 0;
+
+            if (!valido) {
+                seccionVacia.classList.remove("oculto");
+                seccionResultado.classList.add("oculto");
+                return;
+            }
+
+            seccionVacia.classList.add("oculto");
+            seccionResultado.classList.remove("oculto");
+
+            document.getElementById("calificacion").textContent =
+                `${resultado.calificacion}%`;
+
+            document.getElementById("aciertos").textContent =
+                `Respuestas correctas: ${resultado.aciertos} de ${resultado.total}.`;
+
+            document.getElementById("barraResultado").style.width =
+                `${Math.min(100, Math.max(0, resultado.calificacion))}%`;
+
+            let mensaje;
+
+            if (resultado.calificacion === 100) {
+                mensaje = "¡Excelente! Respondiste correctamente todas las preguntas.";
+            } else if (resultado.calificacion >= 60) {
+                mensaje = "¡Buen trabajo! Sigue repasando las recomendaciones de seguridad vial.";
+            } else {
+                mensaje = "Continúa estudiando y vuelve a intentarlo para reforzar tus conocimientos.";
+            }
+
+            document.getElementById("mensaje").textContent = mensaje;
+
+            document.getElementById("fecha").textContent =
+                resultado.fecha
+                    ? `Último intento: ${resultado.fecha}`
+                    : "Fecha del intento no disponible.";
+        }
+
+        mostrarResultado();
+    </script>
+</body>
+</html>
