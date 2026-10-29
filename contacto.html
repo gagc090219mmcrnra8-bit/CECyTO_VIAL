@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101f32">
+  <meta name="description" content="Contacta con CECyTO Vial y comparte tus dudas, sugerencias y comentarios sobre educación y seguridad vial.">
+
+  <title>CECyTO Vial | Contacto</title>
+
+  <style>
+    :root {
+      --azul: #087fce;
+      --azul-oscuro: #003b75;
+      --marino: #101f32;
+      --turquesa: #40e0d0;
+      --celeste: #a6e5ff;
+      --fondo: #f2f7fc;
+      --blanco: #ffffff;
+      --texto: #263747;
+      --borde: #d9e6f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       BARRA DE NAVEGACIÓN Y LOGO
+    ========================= */
+
+    .barra-superior {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      min-height: 76px;
+      padding: 10px 5%;
+      background: var(--marino);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 3px 15px #00000025;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-imagen {
+      width: 53px;
+      height: 53px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: var(--marino);
+      border: 1px solid #40e0d066;
+    }
+
+    .marca-texto {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .marca-texto span {
+      color: var(--turquesa);
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .menu a {
+      padding: 10px 11px;
+      border-radius: 7px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible,
+    .menu a[aria-current="page"] {
+      background: #ffffff20;
+      color: var(--turquesa);
+      outline: none;
+    }
+
+    .boton-menu {
+      display: none;
+      padding: 8px 12px;
+      background: transparent;
+      color: white;
+      border: 1px solid #ffffff55;
+      border-radius: 8px;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       PORTADA DE CONTACTO
+    ========================= */
+
+    .portada {
+      position: relative;
+      overflow: hidden;
+      padding: 65px 25px;
+      color: white;
+      border-bottom: 4px solid var(--turquesa);
+
+      background:
+        linear-gradient(
+          115deg,
+          rgba(7, 24, 44, 0.92),
+          rgba(0, 75, 145, 0.78)
+        ),
+        url("imagenes/portada.jpg") center/cover no-repeat;
+
+      background-color: var(--azul-oscuro);
+    }
+
+    .portada-interior {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .etiqueta {
+      margin-bottom: 12px;
+      color: var(--turquesa);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .portada h1 {
+      margin-bottom: 14px;
+      color: white;
+      font-size: clamp(36px, 6vw, 53px);
+      line-height: 1.15;
+    }
+
+    .portada p:last-child {
+      max-width: 720px;
+      color: #edf7ff;
+      font-size: 17px;
+    }
+
+    /* =========================
+       CONTENIDO
+    ========================= */
+
+    main {
+      width: min(1100px, 100%);
+      margin: auto;
+      padding: 45px 22px 60px;
+    }
+
+    .encabezado-seccion {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .encabezado-seccion h2 {
+      margin-bottom: 8px;
+      color: var(--azul-oscuro);
+      font-size: clamp(26px, 4vw, 35px);
+    }
+
+    .encabezado-seccion p {
+      color: #526578;
+    }
+
+    .rejilla {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: 25px;
+    }
+
+    .tarjeta {
+      min-width: 0;
+      padding: 28px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      box-shadow: 0 7px 24px #173c5b0d;
+    }
+
+    .icono-tarjeta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 17px;
+      background: #e1f6ff;
+      border: 1px solid #c4e9fa;
+      border-radius: 14px;
+      font-size: 27px;
+    }
+
+    .tarjeta h2 {
+      margin-bottom: 14px;
+      color: var(--azul-oscuro);
+      font-size: 25px;
+    }
+
+    .tarjeta h3 {
+      margin: 23px 0 8px;
+      color: var(--azul-oscuro);
+      font-size: 18px;
+    }
+
+    .tarjeta p {
+      margin-bottom: 13px;
+    }
+
+    .info {
+      margin-top: 22px;
+      padding: 18px;
+      background: #e5f5ff;
+      border-left: 4px solid var(--azul);
+      border-radius: 9px;
+    }
+
+    .info strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--azul-oscuro);
+    }
+
+    .info p {
+      margin-bottom: 0;
+    }
+
+    .lista-secciones {
+      display: grid;
+      gap: 11px;
+      margin-top: 15px;
+      list-style: none;
+    }
+
+    .lista-secciones a {
+      display: block;
+      padding: 11px 13px;
+      background: #f3f8fc;
+      border: 1px solid #e1ebf3;
+      border-radius: 8px;
+      color: var(--azul-oscuro);
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .lista-secciones a:hover {
+      background: #e1f6ff;
+      transform: translateX(3px);
+    }
+
+    /* =========================
+       FORMULARIO
+    ========================= */
+
+    form {
+      margin-top: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      color: #243b50;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      margin-top: 7px;
+      padding: 12px 13px;
+      border: 1px solid #b9cbd8;
+      border-radius: 8px;
+      background: white;
+      color: var(--texto);
+      font: inherit;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--azul);
+      outline: 3px solid #087fce25;
+    }
+
+    textarea {
+      min-height: 145px;
+      resize: vertical;
+    }
+
+    .ayuda {
+      margin-top: 6px;
+      color: #5d7183;
+      font-size: 12px;
+    }
+
+    .boton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      margin-top: 20px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--marino);
+      color: white;
+      font: inherit;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .boton:hover {
+      background: var(--azul);
+      transform: translateY(-2px);
+    }
+
+    .boton-secundario {
+      margin-top: 12px;
+      background: var(--azul);
+    }
+
+    #mensaje {
+      margin-top: 16px;
+      padding: 13px 15px;
+      border-radius: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    #mensaje.exito {
+      background: #e4f8ec;
+      border: 1px solid #a9dfbd;
+      color: #175d32;
+    }
+
+    #mensaje.error {
+      background: #fff0f0;
+      border: 1px solid #f0bcbc;
+      color: #8c2525;
+    }
+
+    /* =========================
+       PIE DE PÁGINA
+    ========================= */
+
+    footer {
+      padding: 32px 20px;
+      background: #0b1726;
+      color: #e8f1fa;
+      text-align: center;
+    }
+
+    .logo-pie {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .logo-pie img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .logo-pie strong {
+      font-size: 20px;
+    }
+
+    .logo-pie strong span {
+      color: var(--turquesa);
+    }
+
+    .enlaces-pie {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 17px;
+      margin: 18px 0;
+    }
+
+    .enlaces-pie a {
+      color: var(--celeste);
+      text-decoration: none;
+    }
+
+    .enlaces-pie a:hover {
+      text-decoration: underline;
+    }
+
+    .derechos {
+      margin-top: 16px;
+      color: #b9c7d6;
+      font-size: 13px;
+    }
+
+    /* =========================
+       DISEÑO RESPONSIVO
+    ========================= */
+
+    @media (max-width: 1050px) {
+      .barra-superior {
+        padding: 10px 4%;
+      }
+
+      .boton-menu {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 12px 5% 18px;
+        background: var(--marino);
+        border-top: 1px solid #ffffff20;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: 0 10px 15px #00000020;
+      }
+
+      .menu.abierto {
+        display: flex;
+      }
+
+      .menu a {
+        padding: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .rejilla {
+        grid-template-columns: 1fr;
+      }
+
+      .portada {
+        padding: 48px 21px;
+      }
+
+      main {
+        padding: 32px 15px 45px;
+      }
+
+      .tarjeta {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .marca-texto {
+        font-size: 17px;
+      }
+
+      .logo-imagen {
+        width: 42px;
+        height: 42px;
+      }
+
+      .marca {
+        gap: 8px;
+      }
+
+      .barra-superior {
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN CON EL LOGO ORIGINAL -->
+  <header class="barra-superior">
+
+    <a class="marca" href="index.html" aria-label="CECyTO Vial, inicio">
+
+      <img
+        class="logo-imagen"
+        src="logo cecyto.jpeg"
+        alt="Logo de CECyTO Vial"
+      >
+
+      <span class="marca-texto">
+        CECyTO <span>Vial</span>
+      </span>
+
+    </a>
+
+    <button
+      class="boton-menu"
+      id="botonMenu"
+      type="button"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="menuPrincipal"
+    >
+      ☰
+    </button>
+
+    <nav class="menu" id="menuPrincipal" aria-label="Menú principal">
+      <a href="index.html">Inicio</a>
+      <a href="senales.html">Señales</a>
+      <a href="reglamento.html">Reglamento</a>
+      <a href="infracciones.html">Infracciones</a>
+      <a href="galeria.html">Galería</a>
+      <a href="cuestionario.html">Cuestionario</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="contacto.html" aria-current="page">Contacto</a>
+    </nav>
+
+  </header>
+
+  <!-- PORTADA -->
+  <section class="portada">
+    <div class="portada-interior">
+
+      <p class="etiqueta">Conoce nuestro proyecto</p>
+
+      <h1>Contacto</h1>
+
+      <p>
+        ¿Tienes alguna duda, sugerencia o comentario?
+        Nos interesa conocer tus ideas para seguir promoviendo
+        una cultura de educación y seguridad vial.
+      </p>
+
+    </div>
+  </section>
+
+  <main>
+
+    <div class="encabezado-seccion">
+      <h2>Estamos aquí para escucharte</h2>
+      <p>
+        Conoce el proyecto y utiliza el formulario para preparar
+        un mensaje relacionado con CECyTO Vial.
+      </p>
+    </div>
+
+    <div class="rejilla">
+
+      <!-- INFORMACIÓN DEL PROYECTO -->
+      <section class="tarjeta">
+
+        <div class="icono-tarjeta" aria-hidden="true">🚦</div>
+
+        <h2>Sobre CECyTO Vial</h2>
+
+        <p>
+          CECyTO Vial es un proyecto educativo que busca promover
+          el conocimiento de las señales de tránsito, las normas
+          de circulación y la prevención de accidentes.
+        </p>
+
+        <div class="info">
+          <strong>🎯 Nuestro objetivo</strong>
+          <p>
+            Fomentar una cultura de responsabilidad, respeto y
+            seguridad entre todos los usuarios de la vía pública.
+          </p>
+        </div>
+
+        <h3>Explora las secciones</h3>
+
+        <p>
+          Visita los diferentes apartados de nuestro sitio para
+          ampliar tus conocimientos.
+        </p>
+
+        <ul class="lista-secciones">
+          <li><a href="senales.html">🚸 Señales de tránsito</a></li>
+          <li><a href="reglamento.html">📘 Reglamento vial</a></li>
+          <li><a href="infracciones.html">⚠️ Infracciones y multas</a></li>
+          <li><a href="galeria.html">🖼️ Galería multimedia</a></li>
+          <li><a href="cuestionario.html">📝 Cuestionario interactivo</a></li>
+          <li><a href="chatbot.html">💬 Asistente virtual</a></li>
+        </ul>
+
+        <a href="index.html" class="boton">← Regresar al inicio</a>
+
+      </section>
+
+      <!-- FORMULARIO DE CONTACTO -->
+      <section class="tarjeta">
+
+        <div class="icono-tarjeta" aria-hidden="true">✉️</div>
+
+        <h2>Envíanos un mensaje</h2>
+
+        <p>
+          Completa los campos. Al continuar, se preparará un correo
+          que podrás revisar y enviar desde tu aplicación de correo.
+        </p>
+
+        <form id="formulario" novalidate>
+
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            maxlength="80"
+            autocomplete="name"
+            required
+            placeholder="Escribe tu nombre"
+          >
+
+          <label for="correo">Correo electrónico</label>
+          <input
+            id="correo"
+            name="correo"
+            type="email"
+            maxlength="120"
+            autocomplete="email"
+            required
+            placeholder="tucorreo@ejemplo.com"
+          >
+
+          <label for="asunto">Asunto</label>
+          <select id="asunto" name="asunto" required>
+            <option value="">Selecciona un asunto</option>
+            <option value="Duda sobre el proyecto">Duda sobre el proyecto</option>
+            <option value="Sugerencia">Sugerencia</option>
+            <option value="Error en la página">Error en la página</option>
+            <option value="Otro">Otro</option>
+          </select>
+
+          <label for="comentario">Mensaje</label>
+          <textarea
+            id="comentario"
+            name="comentario"
+            maxlength="2000"
+            required
+            placeholder="Escribe tu mensaje aquí..."
+          ></textarea>
+
+          <p class="ayuda">
+            Máximo 2000 caracteres. Revisa tu mensaje antes de enviarlo.
+          </p>
+
+          <button class="boton" type="submit">
+            Preparar correo ✉️
+          </button>
+
+          <div
+            id="mensaje"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <a
+            id="abrirCorreo"
+            class="boton boton-secundario"
+            href="#"
+            hidden
+          >
+            Abrir correo nuevamente
+          </a>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- PIE DE PÁGINA CON LOGO -->
+  <footer>
+
+    <div class="logo-pie">
+      <img
+        src="logo cecyto.jpeg"
+        alt="Logo de CECyTO Vial"
+        loading="lazy"
+      >
+
+      <strong>CECyTO <span>Vial</span></strong>
+    </div>
+
+    <p>Proyecto educativo de seguridad vial.</p>
+    <p>Aprender las reglas también salva vidas.</p>
+
+    <nav class="enlaces-pie" aria-label="Enlaces del pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="galeria.html">Galería</a>
+      <a href="cuestionario.html">Cuestionario</a>
+      <a href="chatbot.html">Asistente vial</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <p class="derechos">
+      © 2026 CECyTO Vial · Proyecto con fines educativos.
+    </p>
+
+  </footer>
+
+  <script>
+    // MENÚ ADAPTABLE PARA CELULARES
+    const botonMenu = document.getElementById("botonMenu");
+    const menuPrincipal = document.getElementById("menuPrincipal");
+
+    botonMenu.addEventListener("click", function () {
+      const abierto = menuPrincipal.classList.toggle("abierto");
+
+      botonMenu.setAttribute("aria-expanded", String(abierto));
+      botonMenu.setAttribute(
+        "aria-label",
+        abierto ? "Cerrar menú de navegación" : "Abrir menú de navegación"
+      );
+
+      botonMenu.textContent = abierto ? "✕" : "☰";
+    });
+
+    menuPrincipal.querySelectorAll("a").forEach(function (enlace) {
+      enlace.addEventListener("click", function () {
+        menuPrincipal.classList.remove("abierto");
+        botonMenu.setAttribute("aria-expanded", "false");
+        botonMenu.setAttribute("aria-label", "Abrir menú de navegación");
+        botonMenu.textContent = "☰";
+      });
+    });
+
+    // FORMULARIO DE CONTACTO
+    // IMPORTANTE: coloca aquí el correo real del proyecto.
+    const correoDestino = "tu-correo@ejemplo.com";
+
+    const formulario = document.getElementById("formulario");
+    const mensajeEstado = document.getElementById("mensaje");
+    const botonAbrirCorreo = document.getElementById("abrirCorreo");
+
+    function mostrarMensaje(texto, tipo) {
+      mensajeEstado.hidden = false;
+      mensajeEstado.className = tipo;
+      mensajeEstado.textContent = texto;
+    }
+
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      botonAbrirCorreo.hidden = true;
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const asunto = document.getElementById("asunto").value;
+      const comentario = document.getElementById("comentario").value.trim();
+
+      if (!nombre || !correo || !asunto || !comentario) {
+        mostrarMensaje(
+          "Por favor, completa todos los campos antes de continuar.",
+          "error"
+        );
+        return;
+      }
+
+      const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!formatoCorreo.test(correo)) {
+        mostrarMensaje(
+          "Escribe una dirección de correo electrónico válida.",
+          "error"
+        );
+        return;
+      }
+
+      if (correoDestino === "gagc090219mmcrnra8@soycecytem.mx") {
+        mostrarMensaje(
+          "El formulario está preparado. Para utilizarlo, cambia la variable correoDestino en el código por la dirección real del proyecto.",
+          "error"
+        );
+        return;
+      }
+
+      const cuerpo =
+        "Nombre: " + nombre + "\n" +
+        "Correo de contacto: " + correo + "\n\n" +
+        "Mensaje:\n" + comentario;
+
+      const urlCorreo =
+        "mailto:" + correoDestino +
+        "?subject=" + encodeURIComponent("[CECyTO Vial] " + asunto) +
+        "&body=" + encodeURIComponent(cuerpo);
+
+      botonAbrirCorreo.href = urlCorreo;
+      botonAbrirCorreo.hidden = false;
+
+      mostrarMensaje(
+        "Tu mensaje está preparado. Se abrirá tu aplicación de correo; revisa el contenido y pulsa Enviar. Si no se abre automáticamente, utiliza el botón de abajo.",
+        "exito"
+      );
+
+      // Intenta abrir la aplicación de correo del dispositivo.
+      window.location.href = urlCorreo;
+    });
+  </script>
+
+</body>
+</html>
